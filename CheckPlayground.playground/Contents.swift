@@ -2,14 +2,13 @@
   
 import UIKit
 import PlaygroundSupport
-import PearsonFramework
+
 
 // retrieve bundle for your class from framework
-let bundle = Bundle(for: <#screen view controller#>.self)
+let bundle = Bundle(for: <#FrameworkClass#>.self)
 // get storyboard from framework
-let storyboard = UIStoryboard(name: <#storyboard containing view controller#>, bundle: bundle)
-let vc = storyboard.instantiateViewController(withIdentifier: <#view controller storyboard idenitfier#>)
-let parent = playgroundWrapper(child: vc, device: .pad, orientation: .landscape, contentSizeCategory: .accessibilityExtraExtraExtraLarge)
+let storyboard = UIStoryboard(name: <#FrameworkStoryboard#>, bundle: bundle)
+let vc = storyboard.instantiateViewController(withIdentifier: <#ViewControllerStoyboardIdentifier#>)
+let parent = playgroundWrapper(child: vc, device: .phone5_5inch, orientation: .portrait, contentSizeCategory: .accessibilityLarge)
 
 PlaygroundPage.current.liveView = parent
-PlaygroundPage.current.needsIndefiniteExecution = true

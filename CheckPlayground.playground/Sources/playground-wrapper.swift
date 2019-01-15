@@ -6,6 +6,7 @@ public enum Device {
     case phone5_5inch
     case pad
     case pad12_9inch
+    case custom(size: CGSize)
 }
 
 public enum Orientation {
@@ -39,6 +40,22 @@ public func playgroundWrapper(child: UIViewController,
         let traits: UITraitCollection
         let parentSize: CGSize
         switch (device, orientation) {
+        case (.custom(let size), .portrait):
+            parentSize = size
+            traits = .init(traitsFrom: [
+                .init(horizontalSizeClass: .compact),
+                .init(verticalSizeClass: .regular),
+                .init(userInterfaceIdiom: .phone)
+                ])
+            
+        case (.custom(let size), .landscape):
+            parentSize = .init(width: size.height, height: size.width)
+            traits = .init(traitsFrom: [
+                .init(horizontalSizeClass: .regular),
+                .init(verticalSizeClass: .regular),
+                .init(userInterfaceIdiom: .phone)
+                ])
+            
         case (.phone4inch, .portrait):
             parentSize = .init(width: 320, height: 575)
             traits = .init(traitsFrom: [
@@ -130,7 +147,7 @@ public func playgroundWrapper(child: UIViewController,
             child.view.leadingAnchor.constraint(equalTo: parent.view.leadingAnchor),
             child.view.trailingAnchor.constraint(equalTo: parent.view.trailingAnchor),
             child.view.bottomAnchor.constraint(equalTo: parent.view.bottomAnchor),
-            child.view.topAnchor.constraint(equalTo: parent.view.topAnchor),
+            child.view.topAnchor.constraint(equalTo: parent.view.topAnchor)
             ])
         
         return parent
